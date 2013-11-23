@@ -858,6 +858,9 @@ LocalCollection._canSelectorBecomeTrueByModifier = function (selector, modifier)
   if (!isLiteralSelector(selector))
     return true;
 
+  // convert a selector into an object matching the selector
+  // { 'a.b': { ans: 42 }, 'foo.bar': null, 'foo.baz': "something" }
+  // => { a: { b: { ans: 42 } }, foo: { bar: null, baz: "something" } }
   var doc = pathsToTree(_.keys(selector),
                         function (path) { return selector[path]; },
                         _.identity /*conflict resolution is no resolution*/);
