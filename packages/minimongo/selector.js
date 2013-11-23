@@ -898,7 +898,7 @@ function numericKey (s) {
 
 function isLiteralSelector (selector) {
   return _.all(selector, function (subSelector, keyPath) {
-    if (keyPath.substr(0, 1) === "$")
+    if (keyPath.substr(0, 1) === "$" || _.isRegExp(subSelector))
       return false;
     if (!_.isObject(subSelector) || _.isArray(subSelector))
       return true;
