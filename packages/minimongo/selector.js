@@ -867,7 +867,9 @@ LocalCollection._canSelectorBecomeTrueByModifier = function (selector, modifier)
   try {
     LocalCollection._modify(doc, modifier);
   } catch (e) {
-    return false;
+    if (e.name === "MinimongoError")
+      return false;
+    throw e;
   }
 
   return selectorFn(doc);
